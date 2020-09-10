@@ -1,0 +1,35 @@
+﻿@{ 
+    var account = (Account)ViewBag.Account;
+}
+    <h1>Editar Cuenta</h1>
+
+    
+    <form action="/account/create" method="post">
+        Tipo 
+        <select name="Type">
+        @foreach (var item in ViewBag.Types)
+        {
+            if (account.Type == item)
+            {
+                <option value="@item" selected>@item</option>
+            }
+            else
+            {
+                <option value="@item">@item</option>
+            }
+        }
+        </select>
+
+        Nombre <input name="Name" value="@account.Name" />
+        @Html.ValidationMessage("Name")
+
+        Divisa
+        <select name="Currency">
+            <option value="Soles">Soles</option>
+        </select>
+
+        Saldo Inicial <input name="Amount" value="@account.Amount" />
+
+        <button>Guardar</button>
+
+    </form>

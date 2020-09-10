@@ -2,22 +2,23 @@
     <h1>Crear Cuenta</h1>
 
     
-        <form action="/account/save">
-            Tipo <select name="Type">
-                <option value="Efectivo">Efectivo</option>
-                <option value="Debito">Debito</option>
-                <option value="Credito">Credito</option>
-            </select>
+    <form action="/account/create" method="post">
+        Tipo <select name="Type">
+            <option value="Efectivo">Efectivo</option>
+            <option value="Debito">Debito</option>
+            <option value="Credito">Credito</option>
+        </select>
 
-            Nombre <input name="Name" />
+        Nombre <input name="Name" required />
+        @Html.ValidationMessage("Name")
 
-            Divisa
-            <select name="Currency">
-                <option value="Soles">Soles</option>
-            </select>
+        Divisa
+        <select name="Currency">
+            <option value="Soles">Soles</option>
+        </select>
 
-            Saldo Inicial <input name="Amount" />
+        Saldo Inicial <input name="Amount" />
 
-            <button>Guardar</button>
+        <button>Guardar</button>
 
-        </form>
+    </form>

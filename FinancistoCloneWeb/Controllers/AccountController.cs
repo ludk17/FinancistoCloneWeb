@@ -15,24 +15,44 @@ namespace FinancistoCloneWeb.Controllers
             _context = context;
         }
 
-        public ViewResult Index()
+        [HttpGet]
+        public ActionResult Index() // GET y POST
         {
             ViewBag.Accounts = _context.Accounts.ToList();
             return View("Index");
         }
 
-        public ViewResult Create()
+
+        [HttpGet]
+        public ActionResult Create() // GET
         {
             return View("Create");
         }
 
-        public string Save(string Name, string Type, string Currency, decimal Amount)
+        [HttpPost]
+        public ActionResult Create(Account account) // POST
         {
-            var account = new Account { Name = Name, Type = Type, Currency = Currency, Amount = Amount };
-            _context.Accounts.Add(account);
-            _context.SaveChanges();
+            //if(account.Name == null || account.Name == "")
+            //    ModelState.AddModelError("Name1", "El campo Nombre es requerido");
 
-            return Type + " " + Name + " " + Currency + " " + Amount;
+            if(ModelState.IsValid)
+            {
+                _context.Accounts.Add(account);
+                //_context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View("Create");
+            //             
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            ViewBag.Types = new List<string> { "Efectivo", "Debito", "Credito" };
+            ViewBag.Account = _context.Accounts.Where(o => o.Id == id).FirstOrDefault(); // si no lo encutra retorna un null
+
+            return View("Edit");
         }
 
     }

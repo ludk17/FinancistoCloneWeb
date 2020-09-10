@@ -19,7 +19,7 @@ namespace FinancistoCloneWeb.Controllers
         }
 
         public IActionResult Index()
-        {
+        {            
             return View();
         }
 
