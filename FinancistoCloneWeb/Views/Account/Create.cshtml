@@ -1,4 +1,7 @@
-﻿
+﻿@{ 
+    var account = (Account)Model;
+}
+
     <h1>Crear Cuenta</h1>
 
     
@@ -9,7 +12,7 @@
             <option value="Credito">Credito</option>
         </select>
 
-        Nombre <input name="Name" required />
+        Nombre <input name="Name" />
         @Html.ValidationMessage("Name")
 
         Divisa
@@ -17,8 +20,8 @@
             <option value="Soles">Soles</option>
         </select>
 
-        Saldo Inicial <input name="Amount" />
-
+        Saldo Inicial <input name="Amount" value="@account.Amount" />
+        @Html.ValidationMessage("Amount")
         <button>Guardar</button>
 
     </form>

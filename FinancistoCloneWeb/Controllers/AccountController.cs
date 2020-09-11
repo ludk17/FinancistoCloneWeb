@@ -13,20 +13,25 @@ namespace FinancistoCloneWeb.Controllers
         public AccountController(FinancistoContext context)
         {
             _context = context;
+
         }
 
         [HttpGet]
         public ActionResult Index() // GET y POST
         {
-            ViewBag.Accounts = _context.Accounts.ToList();
-            return View("Index");
+               var accounts = _context.Accounts.ToList();
+            // ViewBag.Accounts = accounts; // forma A
+               return View(accounts); // forma B 
+            // Si no se envia el nombre de la vista, se usara una vista con el mismo nombre del metodo
+            
+            //return RedirectToAction("Edit", new { id = 1, nombre="Luis" }); //account/edit?id=1&nombre=Luis
         }
 
 
         [HttpGet]
         public ActionResult Create() // GET
         {
-            return View("Create");
+            return View("Create", new Account());
         }
 
         [HttpPost]
@@ -38,21 +43,44 @@ namespace FinancistoCloneWeb.Controllers
             if(ModelState.IsValid)
             {
                 _context.Accounts.Add(account);
-                //_context.SaveChanges();
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View("Create");
-            //             
+            return View("Create", account);
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id) // account/edit?id=10
         {
             ViewBag.Types = new List<string> { "Efectivo", "Debito", "Credito" };
-            ViewBag.Account = _context.Accounts.Where(o => o.Id == id).FirstOrDefault(); // si no lo encutra retorna un null
+            var account = _context.Accounts.Where(o => o.Id == id).FirstOrDefault(); // si no lo encutra retorna un null
 
-            return View("Edit");
+            return View("Edit", account);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Account account)
+        {
+            //var dbAccount = _context.Accounts.Where(o => o.Id == account.Id).FirstOrDefault();
+            //dbAccount.Name = account.Name;
+            if (ModelState.IsValid)
+            {
+                _context.Accounts.Update(account);
+                _context.SaveChanges();
+                return RedirectToAction("Index"); 
+            }
+            ViewBag.Account = account;
+            return View("edit");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int id)
+        {
+            var account = _context.Accounts.Where(o => o.Id == id).FirstOrDefault();
+            _context.Accounts.Remove(account);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
     }
