@@ -5,11 +5,16 @@
     <h1>Crear Cuenta</h1>
 
     
-    <form action="/account/create" method="post">
-        Tipo <select name="Type">
-            <option value="Efectivo">Efectivo</option>
-            <option value="Debito">Debito</option>
-            <option value="Credito">Credito</option>
+    <form action="/account/create" enctype="multipart/form-data" method="post">
+
+        <input type="file" name="Image" />
+
+        Tipo <select name="TypeId">
+            <option value="">-- Selecciona una opción --</option>
+            @foreach(var item in ViewBag.Types)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
         </select>
 
         Nombre <input name="Name" />

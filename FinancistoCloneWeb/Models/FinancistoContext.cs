@@ -11,6 +11,10 @@ namespace FinancistoCloneWeb.Models
     {
         //Esto se hace por cada tabla de base de datos
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<City> Cities { get; set; }
+
+        public DbSet<Type> Types { get; set; }
 
         public FinancistoContext(DbContextOptions<FinancistoContext> options)
             : base(options) { }
@@ -21,6 +25,9 @@ namespace FinancistoCloneWeb.Models
 
             //Esto se hace por cada tabla de base de datos
             modelBuilder.ApplyConfiguration(new AccountMap());
+            modelBuilder.ApplyConfiguration(new PersonMap());
+            modelBuilder.ApplyConfiguration(new CityMap());
+            modelBuilder.ApplyConfiguration(new TypeMap());
         }
     }
 }

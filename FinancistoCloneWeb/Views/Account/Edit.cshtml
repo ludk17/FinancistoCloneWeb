@@ -12,15 +12,8 @@
         Tipo 
         <select name="Type">
         @foreach (var item in ViewBag.Types)
-        {
-            if (account.Type == item)
-            {
-                <option value="@item" selected>@item</option>
-            }
-            else
-            {
-                <option value="@item">@item</option>
-            }
+        { 
+            <option value="@item">@item</option>
         }
         </select>
         Nombre <input name="Name" value="@account.Name" />

@@ -1,52 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FinancistoCloneWeb.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace FinancistoCloneWeb.Controllers
 {
     public class AccountController : Controller
     {
         private FinancistoContext _context;
-        public AccountController(FinancistoContext context)
+        public IHostEnvironment _hostEnv;
+
+        public AccountController(FinancistoContext context, IHostEnvironment hostEnv)
         {
             _context = context;
-
+            _hostEnv = hostEnv;
         }
 
         [HttpGet]
-        public ActionResult Index() // GET y POST
+        public ActionResult Index()
         {
-               var accounts = _context.Accounts.ToList();
-            // ViewBag.Accounts = accounts; // forma A
-               return View(accounts); // forma B 
-            // Si no se envia el nombre de la vista, se usara una vista con el mismo nombre del metodo
-            
-            //return RedirectToAction("Edit", new { id = 1, nombre="Luis" }); //account/edit?id=1&nombre=Luis
+            var account = new Account();            
+
+            var accounts = _context.Accounts
+                .Include(o => o.Type)
+                .ToList();
+
+            return View(accounts);            
         }
 
 
         [HttpGet]
         public ActionResult Create() // GET
         {
+            ViewBag.Types = _context.Types.ToList();
             return View("Create", new Account());
         }
 
         [HttpPost]
-        public ActionResult Create(Account account) // POST
+        public ActionResult Create(Account account, IFormFile image) // POST
         {
-            //if(account.Name == null || account.Name == "")
-            //    ModelState.AddModelError("Name1", "El campo Nombre es requerido");
-
             if(ModelState.IsValid)
             {
+                // guardar archivo en el servidor
+                if(image != null && image.Length > 0)
+                {
+                    var basePath = _hostEnv.ContentRootPath + @"\wwwroot";
+                    var ruta = @"\files\" + image.FileName;
+
+                    using (var strem = new FileStream(basePath + ruta, FileMode.Create))
+                    {
+                        image.CopyTo(strem);
+                        account.ImagePath = ruta;
+                    }                
+                }
                 _context.Accounts.Add(account);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.Types = _context.Types.ToList();
             return View("Create", account);
         }
 

@@ -13,6 +13,14 @@ namespace FinancistoCloneWeb.Models.Maps
         {
             builder.ToTable("Account");
             builder.HasKey(o => o.Id);
+
+            //builder.HasOne(o => o.Type)
+            //    .WithMany(o => o.Accounts)
+            //    .HasForeignKey(o => o.TypeId);
+
+            builder.HasOne(o => o.Type)
+                .WithMany()
+                .HasForeignKey(o => o.TypeId);
         }
     }
 }

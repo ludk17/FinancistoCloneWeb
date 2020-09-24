@@ -9,11 +9,13 @@ namespace FinancistoCloneWeb.Models
     public class Account
     {
         public int Id { get; set; }        
-        public string Type { get; set; }        
-        [Required(ErrorMessage = "El campo nombre es obligatorio")]
+        public int TypeId { get; set; }
         public string Name { get; set; }
         public string Currency { get; set; }
-        [Required]
         public decimal Amount { get; set; }
+        public string ImagePath { get; set; }
+
+        // relaciones
+        public Type Type { get; set; }
     }
 }
