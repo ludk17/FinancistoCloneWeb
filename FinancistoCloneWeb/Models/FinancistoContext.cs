@@ -13,8 +13,8 @@ namespace FinancistoCloneWeb.Models
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<City> Cities { get; set; }
-
         public DbSet<Type> Types { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public FinancistoContext(DbContextOptions<FinancistoContext> options)
             : base(options) { }
@@ -28,6 +28,7 @@ namespace FinancistoCloneWeb.Models
             modelBuilder.ApplyConfiguration(new PersonMap());
             modelBuilder.ApplyConfiguration(new CityMap());
             modelBuilder.ApplyConfiguration(new TypeMap());
+            modelBuilder.ApplyConfiguration(new UserMap());
         }
     }
 }

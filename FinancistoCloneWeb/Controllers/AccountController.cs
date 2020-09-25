@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using FinancistoCloneWeb.Models;
+﻿using FinancistoCloneWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using System.IO;
+using System.Linq;
 
 namespace FinancistoCloneWeb.Controllers
 {
-    public class AccountController : Controller
+    [Authorize]
+    public class AccountController : BaseController
     {
         private FinancistoContext _context;
         public IHostEnvironment _hostEnv;
 
-        public AccountController(FinancistoContext context, IHostEnvironment hostEnv)
+        public AccountController(FinancistoContext context, IHostEnvironment hostEnv):base(context)
         {
             _context = context;
             _hostEnv = hostEnv;
@@ -26,8 +25,8 @@ namespace FinancistoCloneWeb.Controllers
         public ActionResult Index()
         {
             var account = new Account();            
-
             var accounts = _context.Accounts
+                .Where(o => o.UserId == LoggedUser().Id)
                 .Include(o => o.Type)
                 .ToList();
 
@@ -45,7 +44,9 @@ namespace FinancistoCloneWeb.Controllers
         [HttpPost]
         public ActionResult Create(Account account, IFormFile image) // POST
         {
-            if(ModelState.IsValid)
+            account.UserId = LoggedUser().Id;
+
+            if (ModelState.IsValid)
             {
                 // guardar archivo en el servidor
                 if(image != null && image.Length > 0)
@@ -57,8 +58,9 @@ namespace FinancistoCloneWeb.Controllers
                     {
                         image.CopyTo(strem);
                         account.ImagePath = ruta;
-                    }                
+                    }
                 }
+               
                 _context.Accounts.Add(account);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
@@ -68,27 +70,26 @@ namespace FinancistoCloneWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id) // account/edit?id=10
+        public ActionResult Edit(int id)
         {
-            ViewBag.Types = new List<string> { "Efectivo", "Debito", "Credito" };
+            ViewBag.Types = _context.Types.ToList();
             var account = _context.Accounts.Where(o => o.Id == id).FirstOrDefault(); // si no lo encutra retorna un null
 
-            return View("Edit", account);
+            return View(account);
         }
 
         [HttpPost]
         public ActionResult Edit(Account account)
         {
-            //var dbAccount = _context.Accounts.Where(o => o.Id == account.Id).FirstOrDefault();
-            //dbAccount.Name = account.Name;
             if (ModelState.IsValid)
             {
                 _context.Accounts.Update(account);
                 _context.SaveChanges();
                 return RedirectToAction("Index"); 
             }
-            ViewBag.Account = account;
-            return View("edit");
+
+            ViewBag.Types = _context.Types.ToList();            
+            return View(account);
         }
 
         [HttpGet]
@@ -99,6 +100,8 @@ namespace FinancistoCloneWeb.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        
 
     }
 }

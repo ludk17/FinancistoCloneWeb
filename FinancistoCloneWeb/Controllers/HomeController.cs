@@ -8,9 +8,11 @@ using Microsoft.Extensions.Logging;
 using FinancistoCloneWeb.Models;
 using System.Globalization;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinancistoCloneWeb.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -27,14 +29,17 @@ namespace FinancistoCloneWeb.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-        }
+        }     
 
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Index()
         {            
             return View();
         }
 
         [HttpPost]
+
         public IActionResult Create(Account account)
         {
             if (string.IsNullOrEmpty(account.Name))

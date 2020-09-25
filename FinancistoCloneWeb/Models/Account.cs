@@ -14,8 +14,10 @@ namespace FinancistoCloneWeb.Models
         public string Currency { get; set; }
         public decimal Amount { get; set; }
         public string ImagePath { get; set; }
+        public int UserId { get; set; }
 
         // relaciones
         public Type Type { get; set; }
+        
     }
 }
