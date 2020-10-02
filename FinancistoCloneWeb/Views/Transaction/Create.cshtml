@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+    <form action="/transaction/create" method="post">
+
+        <input type="hidden" name="AccountId" value="@ViewBag.AccountId" />
+
+        <input type="text" name="Summary" placeholder="Motivo" />
+        <input type="datetime-local" name="Date" placeholder="Fecha" />
+        <select name="Type">
+            <option value="GASTO">Gasto</option>
+            <option value="INGRESO">Ingreso</option>
+        </select>
+
+        <input type="text" name="Amount" placeholder="Monto" />
+
+        <button>Guardar</button>
+
+    </form>

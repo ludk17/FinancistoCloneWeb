@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FinancistoCloneWeb.Models;
+using FinancistoCloneWeb.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +39,11 @@ namespace FinancistoCloneWeb
                 {
                     options.LoginPath = "/Auth/Login";
                 });
+
+
+            // Registro de interfaces
+            services.AddTransient<IPersonRepository, PersonRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

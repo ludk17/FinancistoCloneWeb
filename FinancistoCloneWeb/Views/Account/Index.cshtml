@@ -29,10 +29,11 @@
                 <td>@item.Type.Name</td>
                 <td>@item.Name</td>
                 <td>@item.Currency</td>
-                <td>@item.Amount S/.</td>
+                <td>@string.Format("{0:N2}", item.Amount) S./</td>
                 <td>
                     <a href="/Account/edit?id=@item.Id">Editar</a> |
-                    <a href="/Account/delete?id=@item.Id">Eliminar</a>
+                    <a href="/Account/delete?id=@item.Id">Eliminar</a> |
+                    <a href="/Transaction/Index?AccountId=@item.Id">Transacciones</a>
                 </td>
             </tr>
         }

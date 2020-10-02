@@ -2,9 +2,6 @@
 using FinancistoCloneWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FinanancistoWebClone.Tests.Controllers
 {
@@ -21,7 +18,7 @@ namespace FinanancistoWebClone.Tests.Controllers
         [Test]
         public void CreateGuardaCorrectamenteConDatosValidos()
         {
-            var account = new Account { Name = "Efectivo", Type = "Credito" };
+            var account = new Account { Name = "Efectivo", TypeId = 1 };
             var controller = new HomeController(null);
             
             var result = controller.Create(account);

@@ -1,0 +1,26 @@
+﻿@{ 
+    var transactions = (List<Transaction>)Model;
+    var account = (Account)ViewBag.Account;
+}
+
+    <h1>Transacciones - @account.Name</h1>
+
+    <a href="/transaction/create?accountId=@account.Id">Crear transacción</a>
+    <a href="/account">Ir a cuentas</a>
+    <table class="table">
+        <tr>
+            <th>Tipo</th>
+            <th>Resumen</th>
+            <th>Fecha</th>
+            <th>Monto</th>
+        </tr>
+        @foreach(var item in transactions)
+        {
+        <tr>
+            <td>@item.Type</td>
+            <td>@item.Summary</td>
+            <td>@item.Date</td>  
+            <td>@string.Format("{0:N2}", item.Amount) S./</td>
+        </tr>
+        }
+    </table>
