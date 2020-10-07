@@ -59,7 +59,7 @@ namespace FinancistoCloneWeb.Controllers
                     new Claim(ClaimTypes.Name, username)
                 };
                 
-                var claimsIdentity = new ClaimsIdentity(claims, "Login");
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 
                 HttpContext.SignInAsync(claimsPrincipal);
