@@ -1,9 +1,11 @@
-﻿using FinancistoCloneWeb.Controllers;
+﻿
+using FinancistoCloneWeb.Controllers;
 using FinancistoCloneWeb.Models;
 using FinancistoCloneWeb.Repositories;
 using FinancistoCloneWeb.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -18,11 +20,14 @@ namespace FinanancistoWebClone.Tests.Controllers
         public void LoginRetornRedirecToAction()
         {                        
             var repositoryMock = new Mock<IUserRepository>();
-            repositoryMock.Setup(o => o.FindUser("admin", "admin")).Returns(new User { });
+            repositoryMock.Setup(o => o.FindUser("admin", It.IsAny<String>())).Returns(new User { });
 
             var authMock = new Mock<ICookieAuthService>();
 
-            var controller = new AuthController(repositoryMock.Object, authMock.Object, null);
+            var congifMock = new Mock<IConfiguration>();
+            congifMock.Setup(c => c.GetSection(It.IsAny<String>())).Returns(new Mock<IConfigurationSection>().Object);
+
+            var controller = new AuthController(repositoryMock.Object, authMock.Object, congifMock.Object);
             var result = controller.Login("admin", "admin");
 
             Assert.IsInstanceOf<RedirectToActionResult>(result);
