@@ -32,5 +32,6 @@ namespace FinancistoCloneWeb.Models
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new TransactionMap());
         }
+
     }
 }

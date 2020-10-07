@@ -18,6 +18,5 @@ namespace FinancistoCloneWeb.Models
 
         // relaciones
         public Type Type { get; set; }
-        
     }
 }

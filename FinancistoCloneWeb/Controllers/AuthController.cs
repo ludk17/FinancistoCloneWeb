@@ -6,6 +6,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using FinancistoCloneWeb.Models;
+using FinancistoCloneWeb.Repositories;
+using FinancistoCloneWeb.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -14,22 +16,22 @@ using Microsoft.Extensions.Configuration;
 
 namespace FinancistoCloneWeb.Controllers
 {
-    public class AuthController : BaseController
+    public class AuthController : Controller
     {
-        private readonly FinancistoContext context;
-        private readonly IConfiguration configuration;
 
-        public AuthController(FinancistoContext context, IConfiguration configuration): base(context)
-        {
-            this.context = context;
+        public string MiPropiedad { get; set; }
+
+        private readonly IConfiguration configuration;
+        private readonly ICookieAuthService cookieAuthService;
+        private readonly IUserRepository repository;
+
+        public AuthController(IUserRepository repository, ICookieAuthService cookieAuthService, IConfiguration configuration)
+        {     
             this.configuration = configuration;
+            this.repository = repository;
+            this.cookieAuthService = cookieAuthService;
         }
-        
-        [Authorize]
-        public string LoggedUserView()
-        {
-            return "El usuario Logeuado es:" + LoggedUser().Id;
-        }
+
 
         [HttpGet]
         public string Index(string input)
@@ -46,11 +48,10 @@ namespace FinancistoCloneWeb.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            /* validar si el usuario existe en la base de datos y 
+            /* valid5ar si el usuario existe en la base de datos y 
              * verificar que el password sea correcto*/
-            var user = context.Users
-                .Where(o => o.Username == username && o.Password == CreateHash(password))
-                .FirstOrDefault();
+            
+            var user = repository.FindUser(username, CreateHash(password));
 
             if (user != null)
             {
@@ -61,8 +62,10 @@ namespace FinancistoCloneWeb.Controllers
                 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                
-                HttpContext.SignInAsync(claimsPrincipal);
+
+                // cree la cookie y permita la autenticación
+                cookieAuthService.SetHttpContext(HttpContext);
+                cookieAuthService.Login(claimsPrincipal);
 
                 return RedirectToAction("Index", "Home");
             }

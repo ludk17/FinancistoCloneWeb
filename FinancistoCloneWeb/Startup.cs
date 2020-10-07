@@ -1,5 +1,6 @@
 using FinancistoCloneWeb.Models;
 using FinancistoCloneWeb.Repositories;
+using FinancistoCloneWeb.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,9 +35,10 @@ namespace FinancistoCloneWeb
                     options.LoginPath = "/Auth/Login";
                 });
 
-
             // Registro de interfaces
             services.AddTransient<IPersonRepository, PersonRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICookieAuthService, CookieAuthService>();
 
         }
 
