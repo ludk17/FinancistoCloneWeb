@@ -29,6 +29,20 @@
                         </li>
                     </ul>
                 </div>
+                <ul class="navbar-nav ml-md-auto">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a href="/auth/login" class="nav-link text-dark">Login</a>
+                        </li>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a href="/auth/logout" class="nav-link text-dark">Logout</a>
+                        </li>
+                    }
+                </ul>
             </div>
         </nav>
     </header>
