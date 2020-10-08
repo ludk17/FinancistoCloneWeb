@@ -3,24 +3,40 @@
     var account = (Account)ViewBag.Account;
 }
 
-    <h1>Transacciones - @account.Name</h1>
+    <h2>Transacciones - @account.Name</h2>
+    <h4>Monto: @string.Format("{0:N2}", account.Amount) S./</h4>
 
-    <a href="/transaction/create?accountId=@account.Id">Crear transacción</a>
-    <a href="/account">Ir a cuentas</a>
-    <table class="table">
-        <tr>
-            <th>Tipo</th>
-            <th>Resumen</th>
-            <th>Fecha</th>
-            <th>Monto</th>
-        </tr>
-        @foreach(var item in transactions)
-        {
-        <tr>
-            <td>@item.Type</td>
-            <td>@item.Summary</td>
-            <td>@item.Date</td>  
-            <td>@string.Format("{0:N2}", item.Amount) S./</td>
-        </tr>
-        }
-    </table>
+    <div class="row">
+        <div class="col">
+            <div class="clearfix">
+                <a class="btn btn-link float-right" href="/account">Ir a cuentas</a>
+                <a class="btn btn-primary float-right" href="/transaction/create?accountId=@account.Id">Crear transacción</a>
+            </div>
+            <div class="clearfix">
+                <br />
+                <table class="table mt-2">
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Resumen</th>
+                        <th>Fecha</th>
+                        <th>Monto</th>
+                        <th></th>  
+                    </tr>
+                    @foreach (var item in transactions)
+                    {
+                        <tr>
+                            <td>@item.Type</td>
+                            <td>@item.Summary</td>
+                            <td>@string.Format("{0:dd MMM yyyy hh:mm tt}", item.Date)</td>
+                            <td class="@(item.Type == "GASTO" ? "text-danger" : "text-success")">
+                                @string.Format("{0:N2}", item.Amount) S./
+                            </td>
+                            <td>
+                                <a href="/transaction/edit?id=@item.Id">Editar</a>
+                            </td>  
+                        </tr>
+                    }
+                </table>
+            </div>
+            </div>
+    </div>

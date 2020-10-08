@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -47,27 +49,30 @@ namespace FinancistoCloneWeb.Controllers
             account.UserId = LoggedUser().Id;
 
             if (ModelState.IsValid)
-            {
-                // guardar archivo en el servidor
-                if(image != null && image.Length > 0)
-                {
-                    var basePath = _hostEnv.ContentRootPath + @"\wwwroot";
-                    var ruta = @"\files\" + image.FileName;
+            {                
+                account.ImagePath = SaveImage(image);
 
-                    using (var strem = new FileStream(basePath + ruta, FileMode.Create))
+                account.Transactions = new List<Transaction>
+                {
+                    new Transaction
                     {
-                        image.CopyTo(strem);
-                        account.ImagePath = ruta;
+                        Date = DateTime.Now,
+                        Type = "INGRESO",
+                        Amount = account.Amount,
+                        Summary = "Monto Inicial"
                     }
-                }
-               
+                };
+
                 _context.Accounts.Add(account);
                 _context.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             ViewBag.Types = _context.Types.ToList();
             return View("Create", account);
         }
+
+        
 
         [HttpGet]
         public ActionResult Edit(int id)
@@ -101,7 +106,21 @@ namespace FinancistoCloneWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        
+        private string SaveImage(IFormFile image)
+        {
+            if (image != null && image.Length > 0)
+            {
+                var basePath = _hostEnv.ContentRootPath + @"\wwwroot";
+                var ruta = @"\files\" + image.FileName;
+
+                using (var strem = new FileStream(basePath + ruta, FileMode.Create))
+                {
+                    image.CopyTo(strem);
+                    return ruta;
+                }
+            }
+            return null;
+        }
 
     }
 }

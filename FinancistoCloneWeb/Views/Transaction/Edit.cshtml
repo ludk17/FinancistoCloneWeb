@@ -1,0 +1,20 @@
+﻿@model Transaction
+
+
+    <form action="/transaction/edit" method="post">
+
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="AccountId" value="@Model.AccountId" />
+
+        <input type="text" name="Summary" value="@Model.Summary" placeholder="Motivo" />
+        <input type="datetime-local" name="Date" value="@string.Format("{0:yyyy-MM-ddTHH:mm}", Model.Date)" placeholder="Fecha" />        
+        <select name="Type">
+            <option value="GASTO">Gasto</option>
+            <option value="INGRESO">Ingreso</option>
+        </select>
+
+        <input type="text" name="Amount" value="@string.Format("{0:N2}", Math.Abs(Model.Amount))" placeholder="Monto" />
+
+        <button>Guardar</button>
+
+    </form>
