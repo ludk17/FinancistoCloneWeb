@@ -1,0 +1,31 @@
+﻿
+
+    <form action="/transfer/create" method="post">
+
+        Cuenta Origen
+        <select name="sourceAccountId">
+            <option>-- Seleccione una cuenta --</option>
+            @foreach (var item in ViewBag.Accounts)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+
+
+        Cuenta Destino
+        <select name="destAccountId">
+            <option>-- Seleccione una cuenta --</option>
+            @foreach (var item in ViewBag.Accounts)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+
+
+        Monto a transferir
+        <input type="text" name="ammount"  />
+
+        <button>Guardar</button>
+
+
+    </form>
