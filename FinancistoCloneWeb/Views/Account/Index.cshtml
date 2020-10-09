@@ -4,6 +4,7 @@
 }
 
 <h1>Cuentas - ABC</h1>
+<h3>Saldo: @string.Format("{0:N2}", accounts.Sum(o => o.Amount)) S./</h3>
 
 <a href="/account/create">Crear Cuenta</a>
 
@@ -29,7 +30,13 @@
                 <td>@item.Type.Name</td>
                 <td>@item.Name</td>
                 <td>@item.Currency</td>
-                <td>@string.Format("{0:N2}", item.Amount) S./</td>
+                <td class="text-right">
+                    @if (item.TypeId == 3) {
+                        @string.Format("{0:N2} S./", item.Limit)
+                        <br/>
+                    }
+                    @string.Format("{0:N2}", item.Amount) S./
+                </td>
                 <td>
                     <a href="/Account/edit?id=@item.Id">Editar</a> |
                     <a href="/Account/delete?id=@item.Id">Eliminar</a> |

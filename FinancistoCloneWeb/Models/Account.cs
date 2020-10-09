@@ -16,6 +16,8 @@ namespace FinancistoCloneWeb.Models
         public string ImagePath { get; set; }
         public int UserId { get; set; }
 
+        public decimal? Limit { get; set; }
+
         // relaciones
         public Type Type { get; set; }
         public List<Transaction> Transactions { get; set; }

@@ -52,16 +52,24 @@ namespace FinancistoCloneWeb.Controllers
             {                
                 account.ImagePath = SaveImage(image);
 
-                account.Transactions = new List<Transaction>
+                if (account.TypeId == 3) {
+                    account.Limit = account.Amount;
+                    account.Amount = 0;
+                }
+
+                if (account.Amount > 0)
                 {
-                    new Transaction
+                    account.Transactions = new List<Transaction>
                     {
-                        Date = DateTime.Now,
-                        Type = "INGRESO",
-                        Amount = account.Amount,
-                        Summary = "Monto Inicial"
-                    }
-                };
+                        new Transaction
+                        {
+                            Date = DateTime.Now,
+                            Type = "INGRESO",
+                            Amount = account.Amount,
+                            Summary = "Monto Inicial"
+                        }
+                    };
+                }
 
                 _context.Accounts.Add(account);
                 _context.SaveChanges();
