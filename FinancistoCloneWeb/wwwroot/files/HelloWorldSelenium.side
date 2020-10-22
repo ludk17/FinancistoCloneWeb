@@ -1,0 +1,348 @@
+{
+  "id": "3eb8d2d5-b756-4f33-9958-47ce6f4f909a",
+  "version": "2.0",
+  "name": "HelloWorldSelenium",
+  "url": "https://localhost:44310",
+  "tests": [{
+    "id": "a2e6d516-c0c0-4072-8d57-1d174ce2d646",
+    "name": "Pantalla privacy carga correctamente",
+    "commands": [{
+      "id": "c9f8908b-e99b-4c6a-a32c-6a1873f4a93e",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "51217982-dd18-4700-a0ea-3dd62f56e7c3",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Privacy",
+      "targets": [
+        ["linkText=Privacy", "linkText"],
+        ["css=.nav-item:nth-child(2) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Privacy')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Home/Privacy')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Privacy')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "405ebdea-13b3-4cea-b194-012d36b38d94",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=h1",
+      "targets": [
+        ["css=h1", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Privacy Policy')]", "xpath:innerText"]
+      ],
+      "value": "Privacy Policy"
+    }, {
+      "id": "eb7fd9cb-e5fa-42a7-9d53-99f53834ce75",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "9e6f258c-b325-480e-a659-f57a57898df5",
+    "name": "Otro Test",
+    "commands": [{
+      "id": "628275cd-afaa-4858-87f9-40225a04ab14",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6318a26c-f812-445d-b141-2747b8f022ea",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "639x430",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4aad1f95-844d-4392-8195-ba564c8b37c3",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Privacy",
+      "targets": [
+        ["linkText=Privacy", "linkText"],
+        ["css=.nav-item:nth-child(2) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Privacy')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Home/Privacy')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Privacy')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c2a42cb8-ff2d-4c1a-afee-98235c22ef51",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Cuentas",
+      "targets": [
+        ["linkText=Cuentas", "linkText"],
+        ["css=.nav-item:nth-child(3) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Cuentas')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Account')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Cuentas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "804fbeda-e873-4f86-b60a-6e84fedefff0",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Crear Cuenta",
+      "targets": [
+        ["linkText=Crear Cuenta", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Crear Cuenta')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/account/create')]", "xpath:href"],
+        ["xpath=//main/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Crear Cuenta')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f6fe5381-5648-45d1-b10c-279db42a70a7",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=FinancistoCloneWeb",
+      "targets": [
+        ["linkText=FinancistoCloneWeb", "linkText"],
+        ["css=.navbar-brand", "css:finder"],
+        ["xpath=//a[contains(text(),'FinancistoCloneWeb')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'FinancistoCloneWeb')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2537f826-659a-461e-b039-ae51d5e37649",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Home",
+      "targets": [
+        ["linkText=Home", "linkText"],
+        ["css=.nav-item:nth-child(1) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Home')]", "xpath:link"],
+        ["xpath=(//a[contains(@href, '/')])[2]", "xpath:href"],
+        ["xpath=//li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Home')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "50e4cac6-d933-4f39-8631-92b260398d03",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Privacy",
+      "targets": [
+        ["linkText=Privacy", "linkText"],
+        ["css=.nav-item:nth-child(2) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Privacy')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Home/Privacy')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Privacy')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "db25110f-751e-46aa-8f27-0ae33bc64880",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=FinancistoCloneWeb",
+      "targets": [
+        ["linkText=FinancistoCloneWeb", "linkText"],
+        ["css=.navbar-brand", "css:finder"],
+        ["xpath=//a[contains(text(),'FinancistoCloneWeb')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'FinancistoCloneWeb')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "99f83857-6bdd-4789-aaef-7d1f2faade45",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "7ac3da91-d8eb-4ae7-a86c-a1fe4a1540a1",
+    "name": "Registrar Cuenta",
+    "commands": [{
+      "id": "52bddc32-d3b8-4e29-9dc2-a2171ce157d5",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6b025edf-e050-42e7-bf02-a9455f22a01e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Cuentas",
+      "targets": [
+        ["linkText=Cuentas", "linkText"],
+        ["css=.nav-item:nth-child(3) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Cuentas')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/Account')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Cuentas')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8f8fadc8-468f-44cd-ba38-5cb4dabeba86",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Crear Cuenta",
+      "targets": [
+        ["linkText=Crear Cuenta", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Crear Cuenta')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/account/create')]", "xpath:href"],
+        ["xpath=//main/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Crear Cuenta')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3c5349d0-a367-43db-8656-799e627c646b",
+      "comment": "",
+      "command": "click",
+      "target": "name=Name",
+      "targets": [
+        ["name=Name", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='Name']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "48d27d9d-62aa-4c9b-b6ad-3506a95c4288",
+      "comment": "",
+      "command": "click",
+      "target": "name=Type",
+      "targets": [
+        ["name=Type", "name"],
+        ["css=select:nth-child(1)", "css:finder"],
+        ["xpath=//select[@name='Type']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "02537044-7309-4ff5-97ba-2fed5ceda333",
+      "comment": "",
+      "command": "select",
+      "target": "name=Type",
+      "targets": [],
+      "value": "label=Credito"
+    }, {
+      "id": "e6aa6f8d-603b-4b0c-b2f5-71a54ab64b87",
+      "comment": "",
+      "command": "click",
+      "target": "name=Type",
+      "targets": [
+        ["name=Type", "name"],
+        ["css=select:nth-child(1)", "css:finder"],
+        ["xpath=//select[@name='Type']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "23587d6e-226f-4799-8fa6-bc8f8112b776",
+      "comment": "",
+      "command": "click",
+      "target": "name=Name",
+      "targets": [
+        ["name=Name", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='Name']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "286e2384-0852-4b05-b06d-d1183babe917",
+      "comment": "",
+      "command": "type",
+      "target": "name=Name",
+      "targets": [
+        ["name=Name", "name"],
+        ["css=input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='Name']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Targeta Oeschle"
+    }, {
+      "id": "53afcf78-d62a-4da3-8ea7-2010923968fb",
+      "comment": "",
+      "command": "type",
+      "target": "name=Amount",
+      "targets": [
+        ["name=Amount", "name"],
+        ["css=input:nth-child(4)", "css:finder"],
+        ["xpath=//input[@name='Amount']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "500"
+    }, {
+      "id": "61f5c0bf-cc00-4741-b740-3aeddc485dac",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(5)",
+      "targets": [
+        ["css=button:nth-child(5)", "css:finder"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Guardar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1de05b95-cbb3-40d5-99e3-b336f7f14e54",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "2c1558e7-8671-4e33-902f-2685e1e5e356",
+    "name": "Verificar titulo Hola Mundo en Home",
+    "commands": [{
+      "id": "c8b1bc3b-3a0d-43d4-8420-10d885e62542",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f89cc346-daea-450f-b9de-2e27a2a13f27",
+      "comment": "",
+      "command": "pause",
+      "target": "4000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8b1a7f5f-9f16-452c-afe2-c061316ad2d8",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.display-4",
+      "targets": [
+        ["css=.display-4", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Hola Mundo')]", "xpath:innerText"]
+      ],
+      "value": "Hola Mundo"
+    }]
+  }],
+  "suites": [{
+    "id": "a0556ed7-fae8-44d3-a61c-ddf6f1c76d8f",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["a2e6d516-c0c0-4072-8d57-1d174ce2d646"]
+  }],
+  "urls": ["https://localhost:44310/"],
+  "plugins": []
+}

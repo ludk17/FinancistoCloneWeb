@@ -48,7 +48,7 @@ namespace FinancistoCloneWeb.Controllers
         [HttpPost]
         public IActionResult Login(string username, string password)
         {
-            /* valid5ar si el usuario existe en la base de datos y 
+            /* validar si el usuario existe en la base de datos y 
              * verificar que el password sea correcto*/
             
             var user = repository.FindUser(username, CreateHash(password));

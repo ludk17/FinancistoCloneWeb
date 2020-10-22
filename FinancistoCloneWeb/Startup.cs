@@ -40,6 +40,9 @@ namespace FinancistoCloneWeb
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICookieAuthService, CookieAuthService>();
 
+            //services.AddTransient<IFileService, DriveFileService>();
+            //services.AddTransient<IFileService, DropboxFileService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

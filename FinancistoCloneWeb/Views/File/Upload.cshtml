@@ -1,0 +1,16 @@
+﻿<h1>Carga de archivo</h1>
+
+<form action="/file/upload" method="post" enctype="multipart/form-data">
+
+    <label>A donde desea subir</label>
+    <select name="dest">
+        <option value="local">Local</option>
+        <option value="dropbox">Dropbox</option>
+    </select>
+
+    <input type="file" name="file" />
+
+
+    <button>Guardar</button>
+
+</form>

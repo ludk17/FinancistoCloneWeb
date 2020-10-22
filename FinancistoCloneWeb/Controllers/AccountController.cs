@@ -1,4 +1,5 @@
 ﻿using FinancistoCloneWeb.Models;
+using FinancistoCloneWeb.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +17,13 @@ namespace FinancistoCloneWeb.Controllers
     {
         private FinancistoContext _context;
         public IHostEnvironment _hostEnv;
+        private readonly IFileService fileService;
 
-        public AccountController(FinancistoContext context, IHostEnvironment hostEnv):base(context)
+        public AccountController(FinancistoContext context, IHostEnvironment hostEnv, IFileService fileService) :base(context)
         {
             _context = context;
             _hostEnv = hostEnv;
+            this.fileService = fileService;
         }
 
         [HttpGet]
