@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace FinancistoCloneWeb.Models
 {
-    public class City
+    public class Country
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int CountryId { get; set; }
+        public int Name { get; set; }
     }
 }

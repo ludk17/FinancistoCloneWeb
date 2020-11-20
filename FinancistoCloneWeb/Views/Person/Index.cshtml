@@ -1,1 +1,79 @@
-﻿
+﻿@model List<FinancistoCloneWeb.Models.Person>
+<h1>Personas</h1>
+
+<a href="/person/create" data-toggle="modal" data-target="#createPersonModal" class="btn btn-primary">Crear Persona</a>
+<br />
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr></tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.LastName</td>
+                        <td>@item.Email</td>
+                        <td>@item.Document</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="createPersonModal" tabindex="-1" aria-labelledby="createPersonModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Crear Persona</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="submitForm()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <script>
+        $.ajax({
+            'url': '/person/create',
+            'type': 'get'
+        }).done(function (html) {
+            $('.modal-body').html(html);
+        })
+
+        function submitForm() {            
+            $('#createPersonModal form').submit();
+        }
+
+        function guardarPersona(event) {
+            event.preventDefault();            
+
+            $.ajax({
+                url: "/person/create",
+                type: "post",
+                data: data1
+            }).done(function (html) {
+                location.reload();
+            }).fail(function (html) {
+                $('.modal-body').html(html.responseText);
+            });
+        }
+    </script>
+}

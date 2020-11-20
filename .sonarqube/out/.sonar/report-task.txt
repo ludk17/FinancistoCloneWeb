@@ -1,0 +1,6 @@
+projectKey=test
+serverUrl=https://sonar.lumenes.tk
+serverVersion=6.7.6.38781
+dashboardUrl=https://sonar.lumenes.tk/dashboard/index/test
+ceTaskId=AXXbnwSJFuM4cgEaP4fQ
+ceTaskUrl=https://sonar.lumenes.tk/api/ce/task?id=AXXbnwSJFuM4cgEaP4fQ

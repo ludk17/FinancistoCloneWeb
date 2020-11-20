@@ -9,6 +9,8 @@ namespace FinancistoCloneWeb.Repositories
     public interface IUserRepository
     {
         public User FindUser(string username, string password);
+        User FindByUsername(string username);
+        void Create(User user);
     }
 
     public class UserRepository : IUserRepository
@@ -18,6 +20,17 @@ namespace FinancistoCloneWeb.Repositories
         public UserRepository(FinancistoContext context)
         {
             this.context = context;
+        }
+
+        public void Create(User user)
+        {
+            context.Add(user);
+            context.SaveChanges();
+        }
+
+        public User FindByUsername(string username)
+        {
+            return context.Users.Where(o => o.Username == username).FirstOrDefault();
         }
 
         public User FindUser(string username, string password)

@@ -1,34 +1,74 @@
-﻿
+﻿@{ 
+    Layout = null;
+}
+<form action="/person/create" onsubmit="guardarPersona(event)" method="post">
 
-    <form action="/person/create" method="post">
-        <input type="text" name="Name" />
+    <div class="form-group">
+        <label>Nombres</label>
+        <input type="text" class="form-control" name="Name" value="@Model.Name" />
         @Html.ValidationMessage("Name")
-        <input type="text" name="LastName" />
+    </div>
+
+    <div class="form-group">
+        <label>Apellidos</label>
+        <input type="text" class="form-control" name="LastName" value="@Model.LastName" />
         @Html.ValidationMessage("LastName")
-        <input type="text" name="BirthDate" placeholder="Fecha de cumpleaños" />
+    </div>
+
+    <div class="form-group">
+        <label>Fecha de nacimiento</label>
+        <input type="date" class="form-control" name="BirthDate" placeholder="Fecha de cumpleaños" />
         @Html.ValidationMessage("BirthDate")
-        <input type="text" name="Document" />
+    </div>
+
+    <div class="form-group">
+        <label>Documento</label>
+        <input type="text" class="form-control" name="Document" value="@Model.Document" />
         @Html.ValidationMessage("Document")
-        <select name="City">
+    </div>
+
+    <div class="form-group">
+        <label>Ciudad</label>
+        <select name="City" class="form-control">
             @foreach (var item in ViewBag.Cities)
             {
                 <option value="@item.Name">@item.Name</option>
             }
         </select>
         @Html.ValidationMessage("City")
-        <select name="Gender">
+    </div>
+
+    <div class="form-group">
+        <label>Dirección</label>
+        <input type="text" class="form-control" name="Address" value="@Model.Address" />
+        @Html.ValidationMessage("Address")
+    </div>
+
+    <div class="form-group">
+        <label>Genero</label>
+        <select name="Gender" class="form-control">
             <option value="Masculino">Masculino</option>
             <option value="Femenino">Femenino</option>
         </select>
-        <input type="text" name="Gender" />
         @Html.ValidationMessage("Gender")
-        <input type="text" name="Email" />
-        @Html.ValidationMessage("Email")
-        <input type="text" name="Username" />
-        @Html.ValidationMessage("Username")
-        <input type="text" name="Password" />
-        @Html.ValidationMessage("Password")
+    </div>
 
-        <button>Guardar</button>
-        
-    </form>
+    <div class="form-group">
+        <label>Email</label>
+        <input type="text" name="Email" class="form-control" value="@Model.Email" />
+        @Html.ValidationMessage("Email")
+    </div>
+
+    <div class="form-group">
+        <label>Usuario</label>
+        <input type="text" name="Username" class="form-control" value="@Model.Username" />
+        @Html.ValidationMessage("Username")
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" name="Password" class="form-control" />
+        @Html.ValidationMessage("Password")
+    </div>
+
+</form>

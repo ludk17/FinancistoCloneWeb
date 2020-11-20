@@ -26,6 +26,16 @@ namespace FinancistoCloneWeb.Controllers
             new Account {Id = 5, Name = "Bajo el colchon"}
         };
 
+        private List<City> Cities = new List<City>
+        {
+            new City { Id = 1 , Name = "Lima", CountryId = 1},
+            new City { Id = 2 , Name = "Cajamarca", CountryId = 1},
+            new City { Id = 3 , Name = "La Paz", CountryId = 2},
+            new City { Id = 4 , Name = "Cochabamba", CountryId = 2},
+            new City { Id = 5 , Name = "Arica", CountryId = 3},
+            new City { Id = 6 , Name = "Santiago de Chile", CountryId = 3},
+        };
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -36,6 +46,13 @@ namespace FinancistoCloneWeb.Controllers
         public IActionResult Index()
         {            
             return View();
+        }
+
+
+        public IActionResult _Cities(int countryId)
+        {
+            var model = Cities.Where(o => o.CountryId == countryId).ToList();
+            return Json(model);
         }
 
         [HttpPost]

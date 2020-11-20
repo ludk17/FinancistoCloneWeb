@@ -7,3 +7,56 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
+
+<div class="form-group">
+    <label>Pais</label>
+    <select id="pais" class="form-control" onchange="cargarCiudades()">
+        <option value="">-- Seleccione Pais --</option>
+        <option value="1">Perú</option>
+        <option value="2">Bolivia</option>
+        <option value="3">Chile</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label>Ciudad</label>
+    <select id="ciudad" class="form-control">
+        <option value="value">-- Seleccione Ciudad --</option>        
+    </select>
+</div>
+
+
+<div ng-app>
+    <input type="text" ng-model="random" placeholder="Escribe aqui lo que quieras" />
+    <input type="text" ng-model="random2" placeholder="Escribe aqui lo que quieras" />
+    <p id="textToReplace1">{{ random + random2 }}</p>
+    <p id="textToReplace2">{{ random }}</p>
+    <p id="textToReplace3">{{ random }}</p>
+    <p id="textToReplace4">{{ random }}</p>
+</div>
+
+<script>
+    function cargarCiudades() {
+
+        var $select = $('select#ciudad');
+        var $pais = $('select#pais');
+
+        $.ajax({
+            'url': '/home/_cities?countryid=' + $pais.val(),
+            'type': 'get'
+        }).done(function (items) {
+            var options = '<option value="">-- Seleccione Ciudad --</option>';
+            for (i = 0; i < items.length; i++)
+            {
+                options += `<option value="${items[i].id}">${items[i].name}</option>`
+            }
+            $select.html(options);
+        });
+
+        console.log("Esto se ejecutara antes del Done");
+
+    }
+
+   
+</script>
+

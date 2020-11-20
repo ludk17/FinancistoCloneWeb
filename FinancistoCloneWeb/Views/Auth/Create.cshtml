@@ -1,0 +1,10 @@
+﻿
+
+<form action="/auth/create" method="post">
+
+    <input type="text" name="Username" placeholder="Username" />
+    @Html.ValidationMessage("Username")
+    <input type="password" name="Password" placeholder="Password" />
+
+    <button>Guardar</button>
+</form>

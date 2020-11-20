@@ -19,11 +19,12 @@ namespace FinancistoCloneWeb.Controllers
     public class AuthController : Controller
     {
 
+        public const String PASSWORD = "123";
         public string MiPropiedad { get; set; }
 
-        private readonly IConfiguration configuration;
-        private readonly ICookieAuthService cookieAuthService;
-        private readonly IUserRepository repository;
+        private IConfiguration configuration;
+        private ICookieAuthService cookieAuthService;
+        private IUserRepository repository;
 
         public AuthController(IUserRepository repository, ICookieAuthService cookieAuthService, IConfiguration configuration)
         {     
@@ -34,15 +35,43 @@ namespace FinancistoCloneWeb.Controllers
 
 
         [HttpGet]
-        public string Index(string input)
+        public IActionResult Create()
         {
-            return CreateHash(input);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(User user)
+        {
+            int target = -5;
+            int num = 3;
+
+            target = -num; 
+            target = +num;
+
+
+            if (repository.FindByUsername(user.Username) != null)
+            {
+                ModelState.AddModelError("Username", "Usuario Ya existe");
+            }
+
+            if (ModelState.IsValid)
+            {
+                user.Password = CreateHash(user.Password);
+                repository.Create(user);
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         [HttpGet]
         public IActionResult Login()
-        {
-            return View();
+        {         
+            
+                return View();
         }
 
         [HttpPost]

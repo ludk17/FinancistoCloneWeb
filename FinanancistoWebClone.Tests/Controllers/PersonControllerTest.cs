@@ -18,7 +18,7 @@ namespace FinanancistoWebClone.Tests.Controllers
             var repository = new Mock<IPersonRepository>();
             repository.Setup(o => o.GetAll()).Returns(new List<Person>());
 
-            var controller = new PersonController(repository.Object);
+            var controller = new PersonController(repository.Object, null);
             var index = controller.Index();
             Assert.IsInstanceOf<ViewResult>(index);
         }

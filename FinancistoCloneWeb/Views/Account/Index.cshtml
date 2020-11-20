@@ -6,45 +6,24 @@
 <h1>Cuentas - ABC</h1>
 <h3>Saldo: @string.Format("{0:N2}", accounts.Sum(o => o.Amount)) S./</h3>
 
-<a href="/account/create">Crear Cuenta</a>
+<a id="link" onclick="saludar(event)" class="link" href="/account/create">Crear Cuenta</a>
 
-<a href="/transfer/create">Transferencia</a>
+<a class="link" href="/transfer/create">Transferencia</a>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Imagen</th>
-            <th>Tipo</th>
-            <th>Nombre</th>
-            <th>Divisa</th>
-            <th>Saldo</th>
-            <th></th>
-        </tr>
-    </thead>
+<a href="#">Cargar datos</a>
 
-    <tbody>
-        @foreach (var item in accounts)
-        {            
-            <tr>
-                <td>
-                    <img src="@item.ImagePath" width="100" alt="Alternate Text" />
-                </td>
-                <td>@item.Type.Name</td>
-                <td>@item.Name</td>
-                <td>@item.Currency</td>
-                <td class="text-right">
-                    @if (item.TypeId == 3) {
-                        @string.Format("{0:N2} S./", item.Limit)
-                        <br/>
-                    }
-                    @string.Format("{0:N2}", item.Amount) S./
-                </td>
-                <td>
-                    <a href="/Account/edit?id=@item.Id">Editar</a> |
-                    <a href="/Account/delete?id=@item.Id">Eliminar</a> |
-                    <a href="/Transaction/Index?AccountId=@item.Id">Transacciones</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div id="table-content">
+    <h1>Hola Mundo</h1>
+</div>
+
+@section Scripts {
+    <script src="~/js/account.js"></script>
+}

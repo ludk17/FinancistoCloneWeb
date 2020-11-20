@@ -17,25 +17,30 @@ namespace FinancistoCloneWeb.Controllers
     {
         private FinancistoContext _context;
         public IHostEnvironment _hostEnv;
-        private readonly IFileService fileService;
 
-        public AccountController(FinancistoContext context, IHostEnvironment hostEnv, IFileService fileService) :base(context)
+        public AccountController(FinancistoContext context, IHostEnvironment hostEnv) :base(context)
         {
             _context = context;
             _hostEnv = hostEnv;
-            this.fileService = fileService;
         }
 
         [HttpGet]
         public ActionResult Index()
+        {         
+
+            var accounts = new List<Account>();
+            return View(accounts);
+        }
+
+        [HttpGet]
+        public ActionResult _Index()
         {
-            var account = new Account();            
             var accounts = _context.Accounts
                 .Where(o => o.UserId == LoggedUser().Id)
                 .Include(o => o.Type)
                 .ToList();
-
-            return View(accounts);            
+            
+            return View(accounts);
         }
 
 
@@ -77,10 +82,12 @@ namespace FinancistoCloneWeb.Controllers
                 _context.Accounts.Add(account);
                 _context.SaveChanges();
 
-                return RedirectToAction("Index");
+                TempData["SuccessMessage"] = "La cuenta se creo correctamente";                
+                return RedirectToAction("Index"); // ejecuta otro request
             }
+
             ViewBag.Types = _context.Types.ToList();
-            return View("Create", account);
+            return View("Create", account); // no es otro request
         }
 
         
